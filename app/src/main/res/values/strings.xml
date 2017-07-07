@@ -11,6 +11,7 @@
     <string name="git_hub">GitHub</string>
     <string name="blog">Blog</string>
 
+    <string name="demo_cache">CacheUtils Demo</string>
     <string name="demo_activity">ActivityUtils Demo</string>
     <string name="demo_app">AppUtils Demo</string>
     <string name="demo_bar">BarUtils Demo</string>

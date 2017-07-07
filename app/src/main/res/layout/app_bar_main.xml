@@ -51,6 +51,12 @@
                 style="@style/WideBtnStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="cacheClick"
+                android:text="@string/demo_cache"/>
+            <Button
+                style="@style/WideBtnStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:onClick="activityClick"
                 android:text="@string/demo_activity"/>
 

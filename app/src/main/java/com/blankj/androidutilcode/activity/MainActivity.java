@@ -72,6 +72,10 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    public void cacheClick(View view) {
+        startActivity(new Intent(this, CacheActivity.class));
+    }
+
     public void activityClick(View view) {
         startActivity(new Intent(this, ActivityActivity.class));
     }
