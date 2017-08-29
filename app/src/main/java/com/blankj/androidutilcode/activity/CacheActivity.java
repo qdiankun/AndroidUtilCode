@@ -1,6 +1,5 @@
 package com.blankj.androidutilcode.activity;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -47,7 +46,7 @@ public class CacheActivity extends BaseActivity {
     }
 
     @Override
-    public void doBusiness(Context context) {
+    public void doBusiness() {
 
     }
 

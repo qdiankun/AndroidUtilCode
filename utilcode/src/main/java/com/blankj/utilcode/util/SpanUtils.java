@@ -906,9 +906,6 @@ public final class SpanUtils {
         if (backgroundColor != DEFAULT_COLOR) {
             mBuilder.setSpan(new BackgroundColorSpan(backgroundColor), start, end, flag);
         }
-        if (lineHeight != -1) {
-            mBuilder.setSpan(new CustomLineHeightSpan(lineHeight, alignLine), start, end, flag);
-        }
         if (first != -1) {
             mBuilder.setSpan(new LeadingMarginSpan.Standard(first, rest), start, end, flag);
         }
@@ -924,12 +921,11 @@ public final class SpanUtils {
             } else if (iconMarginDrawable != null) {
                 mBuilder.setSpan(new CustomIconMarginSpan(iconMarginDrawable, iconMarginGapWidth, alignIconMargin), start, end, flag);
             } else if (iconMarginUri != null) {
-                mBuilder.setSpan(new CustomIconMarginSpan(Utils.getContext(), iconMarginUri, iconMarginGapWidth, alignIconMargin), start, end, flag);
+                mBuilder.setSpan(new CustomIconMarginSpan(Utils.getApp(), iconMarginUri, iconMarginGapWidth, alignIconMargin), start, end, flag);
             } else if (iconMarginResourceId != -1) {
-                mBuilder.setSpan(new CustomIconMarginSpan(Utils.getContext(), iconMarginResourceId, iconMarginGapWidth, alignIconMargin), start, end, flag);
+                mBuilder.setSpan(new CustomIconMarginSpan(Utils.getApp(), iconMarginResourceId, iconMarginGapWidth, alignIconMargin), start, end, flag);
             }
         }
-
         if (fontSize != -1) {
             mBuilder.setSpan(new AbsoluteSizeSpan(fontSize, fontSizeIsDp), start, end, flag);
         }
@@ -938,6 +934,9 @@ public final class SpanUtils {
         }
         if (xProportion != -1) {
             mBuilder.setSpan(new ScaleXSpan(xProportion), start, end, flag);
+        }
+        if (lineHeight != -1) {
+            mBuilder.setSpan(new CustomLineHeightSpan(lineHeight, alignLine), start, end, flag);
         }
         if (isStrikethrough) {
             mBuilder.setSpan(new StrikethroughSpan(), start, end, flag);
@@ -996,13 +995,13 @@ public final class SpanUtils {
         mBuilder.append("<img>");
         int end = start + 5;
         if (imageBitmap != null) {
-            mBuilder.setSpan(new CustomImageSpan(Utils.getContext(), imageBitmap, alignImage), start, end, flag);
+            mBuilder.setSpan(new CustomImageSpan(Utils.getApp(), imageBitmap, alignImage), start, end, flag);
         } else if (imageDrawable != null) {
             mBuilder.setSpan(new CustomImageSpan(imageDrawable, alignImage), start, end, flag);
         } else if (imageUri != null) {
-            mBuilder.setSpan(new CustomImageSpan(Utils.getContext(), imageUri, alignImage), start, end, flag);
+            mBuilder.setSpan(new CustomImageSpan(Utils.getApp(), imageUri, alignImage), start, end, flag);
         } else if (imageResourceId != -1) {
-            mBuilder.setSpan(new CustomImageSpan(Utils.getContext(), imageResourceId, alignImage), start, end, flag);
+            mBuilder.setSpan(new CustomImageSpan(Utils.getApp(), imageResourceId, alignImage), start, end, flag);
         }
     }
 

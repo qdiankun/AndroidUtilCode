@@ -10,6 +10,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.Process;
 import android.support.annotation.NonNull;
+import android.support.v4.util.SimpleArrayMap;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -52,7 +53,7 @@ public class CacheUtils {
     public static final int HOUR = 3600;
     public static final int DAY  = 86400;
 
-    private static Map<String, CacheUtils> sCacheMap = new HashMap<>();
+    private static final SimpleArrayMap<String, CacheUtils> CACHE_MAP = new SimpleArrayMap<>();
     private CacheManager mCacheManager;
 
     /**
@@ -103,7 +104,7 @@ public class CacheUtils {
      */
     public static CacheUtils getInstance(String cacheName, final long maxSize, final int maxCount) {
         if (isSpace(cacheName)) cacheName = "cacheUtils";
-        File file = new File(Utils.getContext().getCacheDir(), cacheName);
+        File file = new File(Utils.getApp().getCacheDir(), cacheName);
         return getInstance(file, maxSize, maxCount);
     }
 
@@ -131,10 +132,10 @@ public class CacheUtils {
      */
     public static CacheUtils getInstance(@NonNull final File cacheDir, final long maxSize, final int maxCount) {
         final String cacheKey = cacheDir.getAbsoluteFile() + "_" + Process.myPid();
-        CacheUtils cache = sCacheMap.get(cacheKey);
+        CacheUtils cache = CACHE_MAP.get(cacheKey);
         if (cache == null) {
             cache = new CacheUtils(cacheDir, maxSize, maxCount);
-            sCacheMap.put(cacheKey, cache);
+            CACHE_MAP.put(cacheKey, cache);
         }
         return cache;
     }
@@ -942,7 +943,7 @@ public class CacheUtils {
         }
 
         private static Drawable bitmap2Drawable(final Bitmap bitmap) {
-            return bitmap == null ? null : new BitmapDrawable(Utils.getContext().getResources(), bitmap);
+            return bitmap == null ? null : new BitmapDrawable(Utils.getApp().getResources(), bitmap);
         }
     }
 

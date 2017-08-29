@@ -3,9 +3,9 @@ package com.blankj.utilcode.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.support.v4.util.SimpleArrayMap;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -19,7 +19,7 @@ import java.util.Set;
  */
 public final class SPUtils {
 
-    private static Map<String, SPUtils> sSPMap = new HashMap<>();
+    private static SimpleArrayMap<String, SPUtils> SP_UTILS_MAP = new SimpleArrayMap<>();
     private SharedPreferences sp;
 
     /**
@@ -39,16 +39,16 @@ public final class SPUtils {
      */
     public static SPUtils getInstance(String spName) {
         if (isSpace(spName)) spName = "spUtils";
-        SPUtils sp = sSPMap.get(spName);
-        if (sp == null) {
-            sp = new SPUtils(spName);
-            sSPMap.put(spName, sp);
+        SPUtils spUtils = SP_UTILS_MAP.get(spName);
+        if (spUtils == null) {
+            spUtils = new SPUtils(spName);
+            SP_UTILS_MAP.put(spName, spUtils);
         }
-        return sp;
+        return spUtils;
     }
 
     private SPUtils(final String spName) {
-        sp = Utils.getContext().getSharedPreferences(spName, Context.MODE_PRIVATE);
+        sp = Utils.getApp().getSharedPreferences(spName, Context.MODE_PRIVATE);
     }
 
     /**

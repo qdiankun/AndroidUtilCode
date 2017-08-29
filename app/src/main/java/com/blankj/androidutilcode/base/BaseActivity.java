@@ -1,6 +1,7 @@
 package com.blankj.androidutilcode.base;
 
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,7 @@ import android.view.View;
  * </pre>
  */
 public abstract class BaseActivity extends AppCompatActivity
-        implements IBaseView, View.OnClickListener {
+        implements IBaseView {
 
     /**
      * 当前Activity渲染的视图View
@@ -33,13 +34,13 @@ public abstract class BaseActivity extends AppCompatActivity
         mActivity = this;
         Bundle bundle = getIntent().getExtras();
         initData(bundle);
-        setBaseView();
+        setBaseView(bindLayout());
         initView(savedInstanceState, contentView);
-        doBusiness(this);
+        doBusiness();
     }
 
-    protected void setBaseView() {
-        setContentView(contentView = LayoutInflater.from(this).inflate(bindLayout(), null));
+    protected void setBaseView(@LayoutRes int layoutId) {
+        setContentView(contentView = LayoutInflater.from(this).inflate(layoutId, null));
     }
 
     /**

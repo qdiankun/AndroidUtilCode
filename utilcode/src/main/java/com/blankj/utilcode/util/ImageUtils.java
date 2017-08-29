@@ -26,6 +26,7 @@ import android.renderscript.Allocation;
 import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.FloatRange;
 import android.support.annotation.IntRange;
 import android.view.View;
@@ -114,7 +115,7 @@ public final class ImageUtils {
      * @return drawable
      */
     public static Drawable bitmap2Drawable(final Bitmap bitmap) {
-        return bitmap == null ? null : new BitmapDrawable(Utils.getContext().getResources(), bitmap);
+        return bitmap == null ? null : new BitmapDrawable(Utils.getApp().getResources(), bitmap);
     }
 
     /**
@@ -316,28 +317,28 @@ public final class ImageUtils {
     /**
      * 获取bitmap
      *
-     * @param id 资源id
+     * @param resId 资源id
      * @return bitmap
      */
-    public static Bitmap getBitmap(final int id) {
-        return BitmapFactory.decodeResource(Utils.getContext().getResources(), id);
+    public static Bitmap getBitmap(@DrawableRes final int resId) {
+        return BitmapFactory.decodeResource(Utils.getApp().getResources(), resId);
     }
 
     /**
      * 获取bitmap
      *
-     * @param id        资源id
+     * @param resId     资源id
      * @param maxWidth  最大宽度
      * @param maxHeight 最大高度
      * @return bitmap
      */
-    public static Bitmap getBitmap(final int id, final int maxWidth, final int maxHeight) {
+    public static Bitmap getBitmap(@DrawableRes final int resId, final int maxWidth, final int maxHeight) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
-        BitmapFactory.decodeResource(Utils.getContext().getResources(), id, options);
+        BitmapFactory.decodeResource(Utils.getApp().getResources(), resId, options);
         options.inSampleSize = calculateInSampleSize(options, maxWidth, maxHeight);
         options.inJustDecodeBounds = false;
-        return BitmapFactory.decodeResource(Utils.getContext().getResources(), id, options);
+        return BitmapFactory.decodeResource(Utils.getApp().getResources(), resId, options);
     }
 
     /**
@@ -721,7 +722,7 @@ public final class ImageUtils {
         if (isEmptyBitmap(src)) return null;
         RenderScript rs = null;
         try {
-            rs = RenderScript.create(Utils.getContext());
+            rs = RenderScript.create(Utils.getApp());
             rs.setMessageHandler(new RenderScript.RSMessageHandler());
             Allocation input = Allocation.createFromBitmap(rs, src, Allocation.MipmapControl.MIPMAP_NONE, Allocation
                     .USAGE_SCRIPT);
