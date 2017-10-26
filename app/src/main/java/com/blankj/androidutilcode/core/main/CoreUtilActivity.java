@@ -70,7 +70,7 @@ public class CoreUtilActivity extends BaseBackActivity {
     }
 
     public void activityClick(View view) {
-        startActivity(new Intent(this, ActivityActivity.class));
+        ActivityActivity.start(this);
     }
 
     public void appClick(View view) {
@@ -94,7 +94,7 @@ public class CoreUtilActivity extends BaseBackActivity {
     }
 
     public void fragmentClick(View view) {
-        startActivity(new Intent(this, FragmentActivity.class));
+        FragmentActivity.start(this);
     }
 
     public void imageClick(View view) {

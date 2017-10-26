@@ -8,11 +8,18 @@
 
 * ### Activity相关→[ActivityUtils.java][activity.java]→[Demo][activity.demo]
 ```
-isActivityExists   : 判断是否存在activity
-startActivity      : 打开activity
-getLauncherActivity: 获取入口activity
-getTopActivity     : 获取栈顶activity
-finishAllActivities: 结束所有activity
+isActivityExists                 : 判断Activity是否存在
+startActivity                    : 启动Activity
+startActivities                  : 启动多个Activity
+startHomeActivity                : 回到桌面
+getActivityList                  : 获取Activity栈链表
+getLauncherActivity              : 获取启动项Activity
+getTopActivity                   : 获取栈顶Activity
+isActivityExistsInStack          : 判断Activity是否存在栈中
+finishActivity                   : 结束Activity
+finishToActivity                 : 结束到指定Activity
+finishOtherActivitiesExceptNewest: 结束除最新之外的同类型Activity
+finishAllActivities              : 结束所有activity
 ```
 
 * ### App相关→[AppUtils.java][app.java]→[Demo][app.demo]
@@ -230,37 +237,30 @@ getFileExtension          : 根据全路径获取文件拓展名
 
 * ### Fragment相关→[FragmentUtils.java][fragment.java]→[Demo][fragment.demo]
 ```
-addFragment              : 新增fragment
-hideAddFragment          : 先隐藏后新增fragment
-addFragments             : 新增多个fragment
-removeFragment           : 移除fragment
-removeToFragment         : 移除到指定fragment
-removeFragments          : 移除同级别fragment
-removeAllFragments       : 移除所有fragment
-replaceFragment          : 替换fragment
-popFragment              : 出栈fragment
-popToFragment            : 出栈到指定fragment
-popFragments             : 出栈同级别fragment
-popAllFragments          : 出栈所有fragment
-popAddFragment           : 先出栈后新增fragment
-hideFragment             : 隐藏fragment
-hideFragments            : 隐藏同级别fragment
-showFragment             : 显示fragment
-hideShowFragment         : 先隐藏后显示fragment
-getLastAddFragment       : 获取同级别最后加入的fragment
-getLastAddFragmentInStack: 获取栈中同级别最后加入的fragment
-getTopShowFragment       : 获取顶层可见fragment
-getTopShowFragmentInStack: 获取栈中顶层可见fragment
-getFragments             : 获取同级别fragment
-getFragmentsInStack      : 获取栈中同级别fragment
-getAllFragments          : 获取所有fragment
-getAllFragmentsInStack   : 获取栈中所有fragment
-getPreFragment           : 获取目标fragment的前一个fragment
-findFragment             : 查找fragment
-dispatchBackPress        : 处理fragment回退键
-setBackgroundColor       : 设置背景色
-setBackgroundResource    : 设置背景资源
-setBackground            : 设置背景
+add                   : 新增fragment
+show                  : 显示fragment
+hide                  : 隐藏fragment
+showHide              : 先显示后隐藏fragment
+replace               : 替换fragment
+pop                   : 出栈fragment
+popTo                 : 出栈到指定fragment
+popAll                : 出栈所有fragment
+remove                : 移除fragment
+removeTo              : 移除到指定fragment
+removeAll             : 移除所有fragment
+getTop                : 获取顶部fragment
+getTopInStack         : 获取栈中顶部fragment
+getTopShow            : 获取顶部可见fragment
+getTopShowInStack     : 获取栈中顶部可见fragment
+getFragments          : 获取同级别的fragment
+getFragmentsInStack   : 获取同级别栈中的fragment
+getAllFragments       : 获取所有fragment
+getAllFragmentsInStack: 获取栈中所有fragment
+findFragment          : 查找fragment
+dispatchBackPress     : 处理fragment回退键
+setBackgroundColor    : 设置背景色
+setBackgroundResource : 设置背景资源
+setBackground         : 设置背景
 ```
 
 * ### 图片相关→[ImageUtils.java][image.java]→[Demo][image.demo]
@@ -268,6 +268,7 @@ setBackground            : 设置背景
 bitmap2Bytes, bytes2Bitmap      : bitmap与byteArr互转
 drawable2Bitmap, bitmap2Drawable: drawable与bitmap互转
 drawable2Bytes, bytes2Drawable  : drawable与byteArr互转
+view2Bitmap                     : view转bitmap
 getBitmap                       : 获取bitmap
 scale                           : 缩放图片
 clip                            : 裁剪图片
@@ -276,15 +277,16 @@ rotate                          : 旋转图片
 getRotateDegree                 : 获取图片旋转角度
 toRound                         : 转为圆形图片
 toRoundCorner                   : 转为圆角图片
-fastBlur                        : 快速模糊
-renderScriptBlur                : renderScript模糊图片
-stackBlur                       : stack模糊图片
-addFrame                        : 添加颜色边框
+addCornerBorder                 : 添加圆角边框
+addCircleBorder                 : 添加圆形边框
 addReflection                   : 添加倒影
 addTextWatermark                : 添加文字水印
 addImageWatermark               : 添加图片水印
 toAlpha                         : 转为alpha位图
 toGray                          : 转为灰度图片
+fastBlur                        : 快速模糊
+renderScriptBlur                : renderScript模糊图片
+stackBlur                       : stack模糊图片
 save                            : 保存图片
 isImage                         : 根据文件名判断文件是否为图片
 getImageType                    : 获取图片类型
@@ -323,9 +325,11 @@ Config.setGlobalTag     : 设置log全局tag
 Config.setLogHeadSwitch : 设置log头部信息开关
 Config.setLog2FileSwitch: 设置log文件开关
 Config.setDir           : 设置log文件存储目录
+Config.setFilePrefix    : 设置log文件前缀
 Config.setBorderSwitch  : 设置log边框开关
 Config.setConsoleFilter : 设置log控制台过滤器
 Config.setFileFilter    : 设置log文件过滤器
+Config.setStackDeep     : 设置log栈深度
 v                       : Verbose日志
 d                       : Debug日志
 i                       : Info日志
@@ -403,28 +407,27 @@ getReplaceAll  : 替换所有正则匹配的部分
 
 * ### 屏幕相关→[ScreenUtils.java][screen.java]
 ```
-getScreenWidth   : 获取屏幕的宽度（单位：px）
-getScreenHeight  : 获取屏幕的高度（单位：px）
-setFullScreen    : 设置屏幕为全屏
-setLandscape     : 设置屏幕为横屏
-setPortrait      : 设置屏幕为竖屏
-isLandscape      : 判断是否横屏
-isPortrait       : 判断是否竖屏
-getScreenRotation: 获取屏幕旋转角度
-screenShot       : 截屏
-isScreenLock     : 判断是否锁屏
-setSleepDuration : 设置进入休眠时长
-getSleepDuration : 获取进入休眠时长
-isTablet         : 判断是否是平板
+getScreenWidth     : 获取屏幕的宽度（单位：px）
+getScreenHeight    : 获取屏幕的高度（单位：px）
+getScreenDensity   : 获取屏幕密度
+getScreenDensityDpi: 获取屏幕密度DPI
+setFullScreen      : 设置屏幕为全屏
+setLandscape       : 设置屏幕为横屏
+setPortrait        : 设置屏幕为竖屏
+isLandscape        : 判断是否横屏
+isPortrait         : 判断是否竖屏
+getScreenRotation  : 获取屏幕旋转角度
+screenShot         : 截屏
+isScreenLock       : 判断是否锁屏
+setSleepDuration   : 设置进入休眠时长
+getSleepDuration   : 获取进入休眠时长
+isTablet           : 判断是否是平板
 ```
 
 * ### SD卡相关→[SDCardUtils.java][sdcard.java]→[Demo][sdcard.demo]
 ```
 isSDCardEnable: 判断SD卡是否可用
-getSDCardPath : 获取SD卡路径
-getDataPath   : 获取SD卡Data路径
-getFreeSpace  : 计算SD卡的剩余空间
-getSDCardInfo : 获取SD卡信息
+getSDCardPaths: 获取SD卡路径
 ```
 
 * ### 服务相关→[ServiceUtils.java][service.java]
@@ -574,33 +577,24 @@ getZodiac               : 获取星座
 
 * ### 吐司相关→[ToastUtils.java][toast.java]→[Demo][toast.demo]
 ```
-setGravity         : 设置吐司位置
-setView            : 设置吐司view
-getView            : 获取吐司view
-setBgColor         : 设置背景颜色
-setBgResource      : 设置背景资源
-setMessageColor    : 设置消息颜色
-showShortSafe      : 安全地显示短时吐司
-showLongSafe       : 安全地显示长时吐司
-showShort          : 显示短时吐司
-showLong           : 显示长时吐司
-showCustomShortSafe: 安全地显示短时自定义吐司
-showCustomLongSafe : 安全地显示长时自定义吐司
-showCustomShort    : 显示短时自定义吐司
-showCustomLong     : 显示长时自定义吐司
-cancel             : 取消吐司显示
+setGravity     : 设置吐司位置
+setBgColor     : 设置背景颜色
+setBgResource  : 设置背景资源
+setMessageColor: 设置消息颜色
+showShort      : 显示短时吐司
+showLong       : 显示长时吐司
+showCustomShort: 显示短时自定义吐司
+showCustomLong : 显示长时自定义吐司
+cancel         : 取消吐司显示
 ```
 
 * ### 压缩相关→[ZipUtils.java][zip.java]→[Test][zip.test]
 ```
-zipFiles          : 批量压缩文件
 zipFile           : 压缩文件
-unzipFiles        : 批量解压文件
 unzipFile         : 解压文件
 unzipFileByKeyword: 解压带有关键字的文件
 getFilesPath      : 获取压缩文件中的文件路径链表
 getComments       : 获取压缩文件中的注释链表
-getEntries        : 获取压缩文件中的文件对象
 ```
 
 * ### 更新Log→[update_log.md][update_log.md]
@@ -618,7 +612,7 @@ getEntries        : 获取压缩文件中的文件对象
 
 Gradle:
 ``` groovy
-compile 'com.blankj:utilcode:1.8.4'
+compile 'com.blankj:utilcode:1.9.5'
 ```
 
 
@@ -626,7 +620,7 @@ compile 'com.blankj:utilcode:1.8.4'
 
 ```
 // init it in the function of onCreate in ur Application
-Utils.init(context);
+Utils.init(application);
 ```
 
 
@@ -641,7 +635,7 @@ Utils.init(context);
 
 [logo]: https://raw.githubusercontent.com/Blankj/AndroidUtilCode/master/art/logo.png
 
-[aucsvg]: https://img.shields.io/badge/AndroidUtilCode-v1.8.4-brightgreen.svg
+[aucsvg]: https://img.shields.io/badge/AndroidUtilCode-v1.9.5-brightgreen.svg
 [auc]: https://github.com/Blankj/AndroidUtilCode
 
 [apisvg]: https://img.shields.io/badge/API-14+-brightgreen.svg

@@ -32,12 +32,10 @@ android {
 
     buildTypes {
         debug {
-            minifyEnabled false
             testCoverageEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -60,7 +58,6 @@ dependencies {
 
     testCompile "junit:junit:$rootProject.ext.junitVersion"
     testCompile "org.robolectric:robolectric:$rootProject.ext.robolectricVersion"
-    testCompile "com.google.truth:truth:0.31"
 }
-//apply from: "https://raw.githubusercontent.com/xiaopansky/android-library-publish-to-jcenter/master/bintrayUpload.gradle"
-//gradlew bintrayUpload
+//apply from: "../bintrayUpload.gradle"
+//gradle bintrayUpload
